@@ -3,33 +3,58 @@
 <head>
     <title>Team Leaderboard</title>
     <style>
-    body {
-        font-family: Arial;
-        max-width: 800px;
-        margin: 20px auto;
-        padding: 20px;
-    }
-    .team {
-        padding: 10px;
-        margin: 5px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-    }
-</style>
+        body {
+            font-family: Arial;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        .team {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
 </head>
 <body>
     <h1>Team Leaderboard</h1>
+    <input type="text" id="voter" placeholder="Your name">
+    <select id="team1" required>
+    <option value="">Select Team 1</option>
+    <option value="team1">Team 1</option>
+    <option value="team2">Team 2</option>
+    <option value="team3">Team 3</option>
+</select>
+
+<select id="team2" required>
+    <option value="">Select Team 2</option>
+    <option value="team1">Team 1</option>
+    <option value="team2">Team 2</option>
+    <option value="team3">Team 3</option>
+</select>
+    
+    <button onclick="vote()">Vote</button>
     <div id="teams"></div>
     <script>
-    fetch('scores.json')
-        .then(response => response.json())
-        .then(data => {
-            const teamsDiv = document.getElementById('teams');
-            teamsDiv.innerHTML = Object.entries(data.teams)
-                .map(([team, score]) => 
-                    `<div class="team">${team}: ${score} points</div>`
-                ).join('');
-        });
-</script>
+        function vote() {
+            const voter = document.getElementById('voter').value;
+            if (!voter) {
+                alert('Please enter your name');
+                return;
+            }
+            // Voting logic will go here
+        }
+
+        fetch('scores.json')
+            .then(response => response.json())
+            .then(data => {
+                const teamsDiv = document.getElementById('teams');
+                teamsDiv.innerHTML = Object.entries(data.teams)
+                    .map(([team, score]) => 
+                        `<div class="team">${team}: ${score} points</div>`
+                    ).join('');
+            });
+    </script>
 </body>
 </html>
